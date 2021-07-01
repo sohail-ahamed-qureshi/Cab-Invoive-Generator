@@ -10,11 +10,16 @@ namespace NUnitInvoiceGen.Test
         public void GivenDistanceAndTime_ReturnsTotalFare()
         {
             //arrange
-            double expected = 22;
-            int distance = 2;
-            int time = 2;
+            double expected = 20;
+            double distance = 5;
+            double time = 2;
+            Ride ride = new Ride(distance, time)
+            {
+                Distance = distance,
+                Time = time
+            };
             //act
-            double result = invoiceCalculator.InvoiceGenerator(RideType.Ride.NORMAL, distance, time);
+            double result = invoiceCalculator.InvoiceGenerator(RideType.Ride.PREMIUM, ride);
             //assert
             Assert.AreEqual(result, expected);
         }
@@ -24,10 +29,15 @@ namespace NUnitInvoiceGen.Test
         {
             //arrange
             double expected = 0;
-            int distance = 0;
-            int time = 2;
+            double distance = 0;
+            double time = 2;
+            Ride ride = new Ride(distance, time)
+            {
+                Distance = distance,
+                Time = time
+            };
             //act
-            double result = invoiceCalculator.InvoiceGenerator(RideType.Ride.NORMAL, distance, time);
+            double result = invoiceCalculator.InvoiceGenerator(RideType.Ride.NORMAL, ride);
             //assert
             Assert.AreEqual(result, expected);
         }
@@ -36,10 +46,15 @@ namespace NUnitInvoiceGen.Test
         {
             //arrange
             double expected = 0;
-            int distance = 2;
-            int time = 0;
+            double distance = 2;
+            double time = 0;
+            Ride ride = new Ride(distance, time)
+            {
+                Distance = distance,
+                Time = time
+            };
             //act
-            double result = invoiceCalculator.InvoiceGenerator(RideType.Ride.NORMAL, distance, time);
+            double result = invoiceCalculator.InvoiceGenerator(RideType.Ride.NORMAL, ride);
             //assert
             Assert.AreEqual(result, expected);
         }

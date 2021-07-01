@@ -12,7 +12,6 @@ namespace CabInvoiceGenerator
             INVALID_DISTANCE,
             INVALID_TIME,
             PARAMETERS_DOESNT_MEET_REQUIREMENTS
-
         }
 
         public ErrorType type;
@@ -21,4 +20,6 @@ namespace CabInvoiceGenerator
             Console.WriteLine("Error -- "+error +": "+message);
         }
     }
+
+ 
 }

@@ -15,7 +15,7 @@ namespace CabInvoiceGenerator
         /// <param name="rideType">type of ride</param>
         /// <param name="distance">distance travelled</param>
         /// <param name="time">time take to travel the distance</param>
-        public double InvoiceGenerator(RideType.Ride rideType, int distance, int time)
+        public double InvoiceGenerator(RideType.Ride rideType, Ride ride)
         {
             //ride is premium will have permium prices
             //ride is normal will have normal prices, else throw exception
@@ -34,9 +34,9 @@ namespace CabInvoiceGenerator
                     pricepermin = 2;
                 }
                //calculate fare price
-                double fare = FareCalculator(priceperkm, pricepermin, distance, time);
-                Console.WriteLine($"Cab's Invoice \n----------------\n Ride Type:  {rideType} \ndistance:   {distance} km(s), " +
-                    $" \ntime:      {time} mins \n------------------\nTotal fare:  {fare} .Rs");
+                double fare = FareCalculator(priceperkm, pricepermin, ride.Distance, ride.Time);
+                Console.WriteLine($"Cab's Invoice \n----------------\n Ride Type:  {rideType} \ndistance:   {ride.Distance} km(s), " +
+                    $" \ntime:      {ride.Time} mins \n------------------\nTotal fare:  {fare} .Rs");
                 return fare;
             }
             catch (Exception)
@@ -52,7 +52,7 @@ namespace CabInvoiceGenerator
         /// <param name="distance"></param>
         /// <param name="time"></param>
         /// <returns></returns>
-        private double FareCalculator(float priceperkm, float pricepermin, int distance, int time)
+        private double FareCalculator(float priceperkm, float pricepermin, double distance, double time)
         {
             double fare;
             const int MINIMUM_FARE = 20;
@@ -63,12 +63,7 @@ namespace CabInvoiceGenerator
                 if (time <= 0)
                     throw new InvoiceCustomException(InvoiceCustomException.ErrorType.INVALID_TIME, "Invalid time passed");
                 fare = distance * priceperkm + time * pricepermin;
-                if (fare < MINIMUM_FARE)
-                {
-                    fare = MINIMUM_FARE;
-                    return fare;
-                }
-                return fare;
+                return Math.Max(fare,MINIMUM_FARE);
             }
             catch (Exception)
             {
