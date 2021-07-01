@@ -15,13 +15,12 @@ namespace CabInvoiceGenerator
         /// <param name="rideType">type of ride</param>
         /// <param name="distance">distance travelled</param>
         /// <param name="time">time take to travel the distance</param>
-        public void InvoiceGenerator(RideType.Ride rideType, int distance, int time)
+        public double InvoiceGenerator(RideType.Ride rideType, int distance, int time)
         {
             //ride is premium will have permium prices
             //ride is normal will have normal prices, else throw exception
             try
             {
-                
                 if (rideType != RideType.Ride.NORMAL && rideType != RideType.Ride.PREMIUM)
                     throw new Exception();
                 if (rideType == RideType.Ride.NORMAL )
@@ -36,8 +35,9 @@ namespace CabInvoiceGenerator
                 }
                //calculate fare price
                 double fare = FareCalculator(priceperkm, pricepermin, distance, time);
-                Console.WriteLine($"Cab's Invoice \n----------------\ndistance:   {distance} km(s), " +
+                Console.WriteLine($"Cab's Invoice \n----------------\n Ride Type:  {rideType} \ndistance:   {distance} km(s), " +
                     $" \ntime:      {time} mins \n------------------\nTotal fare:  {fare} .Rs");
+                return fare;
             }
             catch (Exception)
             {

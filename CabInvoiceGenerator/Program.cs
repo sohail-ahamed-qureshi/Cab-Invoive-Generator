@@ -6,8 +6,7 @@ namespace CabInvoiceGenerator
     {
         static void Main(string[] args)
         {
-            InvoiceCalculator invoiceCalculator = new InvoiceCalculator();
-            invoiceCalculator.InvoiceGenerator(RideType.Ride.NORMAL, 1, 1);
+            Console.WriteLine("Cab Invoice Generator problem statement using Test Driven Development ");
         }
     }
 }
