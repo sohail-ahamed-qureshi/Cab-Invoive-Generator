@@ -67,15 +67,39 @@ namespace NUnitInvoiceGen.Test
             double time0 = 1;
             double distance1 = 22;
             double time1 = 2;
+            double average = 0;
             ride[0] = new Ride(distance0, time0) { Distance = distance0, Time = time0 };
             ride[1] = new Ride(distance1, time1) {   Distance = distance1,  Time = time1 };
             ride[2] = new Ride{  Distance = 11, Time = 10  };
             double expected = 463.00;
             //act
             InvoiceCalculator invoiceCalculator = new InvoiceCalculator();
-            double result = invoiceCalculator.InvoiceGenerator(ride);
+            double result = invoiceCalculator.InvoiceGenerator(ride, out average);
             //assert
             Assert.AreEqual(expected, result);
+        }
+
+        [Test]
+        public void GivenMultipleValue_ReturnsAverageTotal()
+        {
+            //arrange
+            Ride[] ride = new Ride[3];
+            double distance0 = 12;
+            double time0 = 1;
+            double distance1 = 22;
+            double time1 = 2;
+            double average = 0;
+            ride[0] = new Ride(distance0, time0) { Distance = distance0, Time = time0 };
+            ride[1] = new Ride(distance1, time1) { Distance = distance1, Time = time1 };
+            ride[2] = new Ride { Distance = 11, Time = 10 };
+            double expected = 463.00;
+            double expectedAverage = 154;
+            //act
+            InvoiceCalculator invoiceCalculator = new InvoiceCalculator();
+            double result = invoiceCalculator.InvoiceGenerator(ride, out average);
+            //assert
+            Assert.AreEqual(expected, result);
+            Assert.AreEqual(expectedAverage, average);
         }
     }
 }

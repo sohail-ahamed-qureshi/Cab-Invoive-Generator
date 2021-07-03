@@ -74,14 +74,15 @@ namespace CabInvoiceGenerator
         /// perform invoice calculation for multiple rides and return aggregate total for rides
         /// </summary>
         /// <param name="ride">array of rides</param>
-        /// <returns>total aggregate of rides</returns>
-        public double InvoiceGenerator(Ride[] ride)
+        /// <returns>total aggregate of rides and also average value of rides</returns>
+        public double InvoiceGenerator(Ride[] ride, out double average)
         {
             double totalFare = 0;
             for (int i = 0; i < ride.Length; i++)
             {
                 totalFare += InvoiceGenerator(RideType.Ride.NORMAL, ride[i]);
             }
+            average = Math.Round(totalFare / ride.Length);
             return totalFare;
         }
     }
