@@ -70,5 +70,19 @@ namespace CabInvoiceGenerator
                 throw new InvoiceCustomException(InvoiceCustomException.ErrorType.PARAMETERS_DOESNT_MEET_REQUIREMENTS, "Distance or time cannot be 0");
             }
         }
+        /// <summary>
+        /// perform invoice calculation for multiple rides and return aggregate total for rides
+        /// </summary>
+        /// <param name="ride">array of rides</param>
+        /// <returns>total aggregate of rides</returns>
+        public double InvoiceGenerator(Ride[] ride)
+        {
+            double totalFare = 0;
+            for (int i = 0; i < ride.Length; i++)
+            {
+                totalFare += InvoiceGenerator(RideType.Ride.NORMAL, ride[i]);
+            }
+            return totalFare;
+        }
     }
 }

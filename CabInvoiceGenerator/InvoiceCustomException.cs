@@ -20,6 +20,4 @@ namespace CabInvoiceGenerator
             Console.WriteLine("Error -- "+error +": "+message);
         }
     }
-
- 
 }
