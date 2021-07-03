@@ -10,7 +10,7 @@ namespace NUnitInvoiceGen.Test
         public void GivenDistanceAndTime_ReturnsTotalFare()
         {
             //arrange
-            double expected = 20;
+            double expected = 79;
             double distance = 5;
             double time = 2;
             Ride ride = new Ride(distance, time)
@@ -100,6 +100,19 @@ namespace NUnitInvoiceGen.Test
             //assert
             Assert.AreEqual(expected, result);
             Assert.AreEqual(expectedAverage, average);
+        }
+
+        [Test]
+        public void GivenUserId_ReturnsInvoice()
+        {
+            //arrange
+            int userId = 1;
+            double expected = 242;
+            //act
+            RideRepository ride = new RideRepository();
+            double result = ride.GetInvoice(userId);
+            //assert
+            Assert.AreEqual(expected, result);
         }
     }
 }
